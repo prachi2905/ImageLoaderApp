@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Image Loader App</string>
+    <string name="search">Search</string>
+    <string name="clear_search_desc">Image to clear search bar</string>
+    <string name="retry">Retry</string>
+    <string name="alert">Do you want to see more of this image by </string>
+    <string name="error_loading_images">There was an error loading the images,\nplease check your internet and try again</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_result">Your search didn\'t bring up any result</string>
+    <string name="nothing">Nothing!!</string>
+    <string name="are_you_sure">Are you sure?</string>
+    <string name="your_connection_be_is_off">Your connection seems off…</string>
+    <string name="try_again">Try Again</string>
+    <string name="show_details">Show Details</string>
+    <string name="show_more_details">Are you want to see more details?</string>
+    <string name="yes">YES</string>
+    <string name="no">NO</string>
+</resources>

@@ -1,0 +1,104 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'kotlin-kapt'
+}
+apply from: "${rootProject.projectDir}/versions.gradle"
+apply from: "${rootProject.projectDir}/build-global.gradle"
+
+android {
+    compileSdkVersion = 33
+
+    defaultConfig {
+        applicationId "com.pixabay.imageloaderapp"
+        minSdk 21
+        targetSdk 32
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "KEY", "\"" + getKey() + "\"")
+        buildConfigField("String", "BASE_URL", "\"" + getBaseUrl() + "\"")
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding = true
+    }
+    hilt {
+        enableAggregatingTask = true
+    }
+}
+
+dependencies {
+
+    implementation "androidx.core:core-ktx:$core"
+    implementation "androidx.appcompat:appcompat:$compat"
+    implementation "com.google.android.material:material:$material"
+
+    //test
+    androidTestImplementation "org.mockito:mockito-core:$mockito"
+    testImplementation "org.mockito:mockito-core:$mockito"
+    androidTestImplementation "org.mockito:mockito-android:$mockito"
+    testImplementation "junit:junit:$jUnitVersion"
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation "androidx.test.ext:junit:$jUnitVersionEx"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoCore"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoCore"
+
+    //dagger hilt
+    implementation "com.google.dagger:hilt-android:$hiltVersion"
+    kapt "com.google.dagger:hilt-android-compiler:$hiltVersion"
+    kapt "androidx.hilt:hilt-compiler:$hiltCompiler"
+    implementation "androidx.hilt:hilt-work:$hiltCompiler"
+    // Glide
+    implementation "com.github.bumptech.glide:glide:$glide_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    //Room Database
+    implementation "androidx.room:room-runtime:$room"
+    implementation "androidx.room:room-ktx:$room"
+    implementation "androidx.room:room-paging:$room"
+    kapt "androidx.room:room-compiler:$room"
+
+    def nav_version = "2.3.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    //retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$loggingIntercepter"
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    implementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
+
+    //pagination
+    implementation "androidx.paging:paging-runtime-ktx:$pagingVersion"
+
+}
+def getKey() {
+    return project.findProperty("key")
+}
+
+def getBaseUrl() {
+    return project.findProperty("base_url")
+}
